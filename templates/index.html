@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing URL Detector</title>
+</head>
+<body>
+    <h1>🔒 Hybrid Phishing URL Detector</h1>
+
+    <form method="POST">
+        <label for="url">Enter URL to check:</label>
+        <input type="text" id="url" name="url" required placeholder="e.g. http://example.com">
+        <button type="submit">Check</button>
+    </form>
+
+    {% if url %}
+        <h3>URL Entered: {{ url }}</h3>
+    {% endif %}
+
+    {% if prediction %}
+        <h2>Prediction Result:</h2>
+
+        {% if prediction.error %}
+            <p style="color: red;">❌ {{ prediction.error }}</p>
+        {% else %}
+            <ul>
+                {% for key, value in prediction.items() %}
+                    <li><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
